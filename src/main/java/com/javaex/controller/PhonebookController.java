@@ -58,10 +58,9 @@ public class PhonebookController {
 	private String list(Model model) {
 		System.out.println("phonebookcontroller.list()");
 
-		List<PersonVo> personList = phonebookService.exeList();
-		
-		System.out.println(personList);
-		model.addAttribute("pList", personList);
+		List<PersonVo> pList = phonebookService.exeList();
+
+		model.addAttribute("pList", pList);
 
 		return "list";
 	}
@@ -77,6 +76,32 @@ public class PhonebookController {
 
 		return "redirect:/list";
 
+	}
+
+	/****************
+	 * 4. 수정폼
+	 *****************/
+	@RequestMapping(value = "/modifyform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String modifyForm(@RequestParam(value = "no") int no, Model model) {
+		System.out.println("PhonebookController.modifyForm()");
+
+		PersonVo personVo = phonebookService.exeModifyForm(no);
+
+		model.addAttribute("personVo", personVo);
+
+		return "modifyForm";
+	}
+
+	/****************
+	 * 4-1. 수정
+	 *****************/
+	@RequestMapping(value = "/modify", method = { RequestMethod.GET, RequestMethod.POST })
+	public String modify(@ModelAttribute PersonVo personVo) {
+		System.out.println("PhonebookController.modify()");
+
+		phonebookService.exeModify(personVo);
+
+		return "redirect:/list";
 	}
 
 }

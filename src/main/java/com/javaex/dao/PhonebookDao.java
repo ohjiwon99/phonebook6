@@ -32,8 +32,8 @@ public class PhonebookDao {
 	public List<PersonVo> personSelect() {
 		System.out.println("PhonebookDao.personSelect()");
 		
-		List<PersonVo> personList = sqlSession.selectList("phonebook.select");
-		return personList;
+		List<PersonVo> pList = sqlSession.selectList("phonebook.select");
+		return pList;
 		
 		//return sqlSession.selectList("phonebook.select");
 	}
@@ -48,4 +48,26 @@ public class PhonebookDao {
 		return sqlSession.delete("phonebook.delete", no);
 	}
 
+	/****************
+	 * 4. 수정폼
+	 *****************/
+	public PersonVo personSelectOne(int no) {
+		System.out.println("PhonebookDao.personSelectOne");
+		
+		PersonVo personVo=sqlSession.selectOne("phonebook.selectOne",no);
+		System.out.println(personVo);
+		
+		return personVo;
+	}
+	
+	/****************
+	 * 4-1. 수정
+	 *****************/
+	public int personUpdate(PersonVo personVo) {
+		System.out.println("PhonebookDao.personUpdate");
+		
+		int count=sqlSession.update("phonebook.update", personVo);
+		
+		return count;
+	}
 }

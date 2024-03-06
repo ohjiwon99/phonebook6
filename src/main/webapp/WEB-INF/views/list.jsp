@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 
 	<p>등록된 전화번호 리스트입니다.</p>
 
-	<c:forEach items="${pList}" var="personVo">
+	<c:forEach items="${requestScope.pList}" var="personVo">
 		<table border="1">
 			<tr>
 				<th>이름(name)</th>
@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<td><a href="/phonebook6/delete?no=${personVo.personId}">[삭제]</a></td>
-				<td><a href="">[수정]</a></td>
+				<td><a href="/phonebook6/modifyform?no=${personVo.personId}">[수정]</a></td>
 			</tr>
 
 		</table>
@@ -41,7 +41,7 @@
 
 	</c:forEach>
 
-	<a href="/phonebook6/writeform">추가번호 등록</a>
+	<a href="${pageContext.request.contextPath}/writeform">추가번호 등록</a>
 
 </body>
 
